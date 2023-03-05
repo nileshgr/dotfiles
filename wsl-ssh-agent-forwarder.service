@@ -1,0 +1,10 @@
+[Unit]
+Description=WSL SSH Agent Forwarder
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat UNIX-LISTEN:/home/nilesh/.ssh/agent.sock,unlink-early,fork EXEC:"/mnt/c/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent"
+Restart=always
+
+[Install]
+WantedBy=default.target
