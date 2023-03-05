@@ -1,0 +1,4 @@
+user.name=Nilesh S
+user.email=git@nileshgr.com
+push.default=matching
+push.autosetupremote=true
