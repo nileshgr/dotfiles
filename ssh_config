@@ -1,0 +1,11 @@
+ForwardAgent yes
+ControlMaster auto
+ControlPath /tmp/ssh_mux_%C
+ControlPersist 4h
+
+SendEnv GIT_*
+
+ServerAliveCountMax 5
+ServerAliveInterval 60
+
+GSSAPIAuthentication no
