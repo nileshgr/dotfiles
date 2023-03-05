@@ -2,3 +2,4 @@
 memory=4GB
 swap=4GB
 processors=4
+vmIdleTimeout=-1
