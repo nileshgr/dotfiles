@@ -106,7 +106,7 @@ if [[ $(uname -r) =~ WSL2 ]]; then
 
 	git() {
 		if [[ $(pwd) =~ /mnt/ ]]; then
-			"/mnt/c/Program Files/Git/bin/git.exe" $@
+			git.exe $@
 		else
 			/usr/bin/git $@
 		fi
