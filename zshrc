@@ -100,19 +100,22 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-git() {
-	if [[ $(pwd) =~ /mnt/ ]]; then
-		"/mnt/c/Program Files/Git/bin/git.exe" $@
-	else
-		/usr/bin/git $@
+
+if [[ $(uname -r) =~ WSL2 ]]; then
+	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+
+	if ! ss -a | grep -q $SSH_AUTH_SOCK; then
+		rm -f $SSH_AUTH_SOCK
+		( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
 	fi
-}
 
-export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-
-if ! ss -a | grep -q $SSH_AUTH_SOCK; then
-	rm -f $SSH_AUTH_SOCK
-	( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+	git() {
+		if [[ $(pwd) =~ /mnt/ ]]; then
+			"/mnt/c/Program Files/Git/bin/git.exe" $@
+		else
+			/usr/bin/git $@
+		fi
+	}
 fi
 
 eval `keychain --agents ssh --inherit any`
