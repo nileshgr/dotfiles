@@ -76,7 +76,22 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+if [[ $WT_SESSION ]]; then
+	# This code is needed to let Windows Terminal open
+	# new terminal (duplicate tab action)
+	# in the same working directory
+	# References:
+	# https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory
+	# https://github.com/microsoft/terminal/issues/3158#issuecomment-1138825375
+	keep_current_path() {
+		printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
+	}
+	chpwd_functions=(keep_current_path $chpwd_functions)
+fi
+
 # export MANPATH="/usr/local/man:$MANPATH"
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:/snap/bin:$HOME/.rvm/bin"
 
 # You may need to manually set your language environment
 export LANG=en_IN.UTF-8
@@ -87,7 +102,8 @@ export LANG=en_IN.UTF-8
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR=vim
+export EDITOR=nvim
+alias vim=nvim
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,6 +127,8 @@ if [[ $(uname -r) =~ WSL2 ]]; then
 			/usr/bin/git $@
 		fi
 	}
+else
+	eval `keychain --eval --agents ssh --inherit any`
 fi
 
-eval `keychain --eval --agents ssh --inherit any`
+source ~/.shell_secrets

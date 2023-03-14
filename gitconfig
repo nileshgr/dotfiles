@@ -1,4 +1,6 @@
-user.name=Nilesh S
-user.email=git@nileshgr.com
-push.default=matching
-push.autosetupremote=true
+[user]
+	name = Nilesh S
+	email = git@nileshgr.com
+[push]
+	default = matching
+	autosetupremote = true
