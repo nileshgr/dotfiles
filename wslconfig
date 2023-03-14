@@ -1,5 +1,3 @@
 [wsl2]
-memory=4GB
+memory=12GB
 swap=4GB
-processors=4
-vmIdleTimeout=-1
