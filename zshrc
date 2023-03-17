@@ -103,7 +103,6 @@ export LANG=en_IN.UTF-8
 #   export EDITOR='mvim'
 # fi
 export EDITOR=nvim
-alias vim=nvim
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -119,14 +118,6 @@ alias vim=nvim
 
 if [[ $(uname -r) =~ WSL2 ]]; then
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-
-	git() {
-		if [[ $(pwd) =~ /mnt/ ]]; then
-			git.exe $@
-		else
-			/usr/bin/git $@
-		fi
-	}
 else
 	eval `keychain --eval --agents ssh --inherit any`
 fi

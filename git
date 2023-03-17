@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Stub for WSL
+# To increase speed of terminal prompt and in general git operations
+# Put it in /usr/local/bin or any path which has higher priority over
+# /usr/bin/git
+
+if [[ $(pwd -P) =~ /mnt/ ]]; then
+        git.exe "$@"
+else
+	/usr/bin/git "$@"
+fi
