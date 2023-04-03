@@ -8,6 +8,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
+vim.opt.mouse = ''
 
 pcall(vim.cmd, 'colorscheme onedark')
 
@@ -70,3 +71,8 @@ local lsp = require('lsp-zero').preset({
 lsp.nvim_workspace()
 
 lsp.setup()
+
+local lspconfig = require("lspconfig")
+lspconfig.ruby_ls.setup({
+  cmd = {"bundle", "exec", "ruby-lsp"}
+})
