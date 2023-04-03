@@ -6,7 +6,9 @@
 # /usr/bin/git
 
 if [[ $(pwd -P) =~ /mnt/ ]]; then
-        git.exe "$@"
+  cmd=git.exe
 else
-	/usr/bin/git "$@"
+  cmd=/usr/bin/git
 fi
+
+exec $cmd $*
